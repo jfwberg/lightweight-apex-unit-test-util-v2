@@ -2,19 +2,19 @@
 ## Description
 A lightweight Apex Unit Test Utility library for User creation, Exception Testing and HTTP Callout Mocking
 
-| Managed Package Info | Value |
+## Blog details
+https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-apex-unit-tests-958bef9c34a9
+
+## Package info
+| Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
 |Version|2.0.0-2|
-|Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvUDQA0*
-|GIT URL|https://github.com/jfwberg/lightweight-apex-unit-test-util-v2.git|
+|Managed Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvUDQA0*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvU8QAK*
 
-| Unlocked Package Info | Value |
-|---|---|
-|Name|Lightweight - Apex Unit Test Util v2 (Unlocked)|
-|Version|2.0.0-2|
-|Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvU8QAK*
-|GIT URL|https://github.com/jfwberg/lightweight-apex-unit-test-util-v2.git|
+
+
 
 # Demo
 For detailed examples see the *force-app/demo* folder. Note that teh demo files are OOTB only working with the packaged versions. To use the custom versions remove the namespace and update the class names accordingly.
@@ -84,6 +84,23 @@ String message = utl.Tst.getForcedExceptionMessage();
 // This method will fail the test as it should not be reached
 utl.Tst.assertExceptionHasBeenThrow();
 
+// Assert the default forced exception message
+utl.Tst.assertForcedExceptionMessage(e);
+
+// Assert a string and the exception message from the e.getMessage() method
+utl.Tst.assertExceptionMessage('expectedMessage', 'actualMessage');
+utl.Tst.assertExceptionMessage('expectedMessage', e);
+
+// Assert a formatted string with a single value and the exception message from e.getMessage()
+// Example: "sObject {0} does not exist in the metadata"
+utl.Tst.assertExceptionMessage('expectedMessage', 'firstDetail', 'actualMessage');
+utl.Tst.assertExceptionMessage('expectedMessage', 'firstDetail', e);
+
+// Assert a formatted string with multiple values and the exception message from e.getMessage()
+// Example: "field {0} does not exist on sObject {1}"
+utl.Tst.assertExceptionMessage('expectedMessage', 'firstDetail', 'secondDetail', 'actualMessage');
+utl.Tst.assertExceptionMessage('expectedMessage', 'firstDetail', 'secondDetail', e);
+
 
 /**
  * STATIC RESOURCE METHODS
@@ -100,4 +117,37 @@ User currentUser = Tst.getRunningUser();
 
 // Method and overload methods to create a new User
 User runAsUser = Tst.createRunAsUser(PROFILE_NAME);
+
+// Method and overload methods to create a new User with a profile and single permission set
+User runAsUser = Tst.createRunAsUser(
+    PROFILE_NAME,
+    PERMISSION_SET_NAME
+);
+
+// Method and overload methods to create a new User with a profile and multiple permission sets
+User runAsUser = Tst.createRunAsUser(
+    PROFILE_NAME,
+    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO}
+);
+
+
+// Method and overload methods to create a new User with a profile and multiple permission sets
+User runAsUser = Tst.createRunAsUser(
+    PROFILE_NAME,
+    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO}
+);
+
+// Method and overload methods to create a new User with a profile and multiple permission sets
+// and the ability to override any fields on the User record.
+User runAsUser = createRunAsUser(
+    PROFILE_NAME,
+    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO},
+    new Map<String,Object>{
+        'FirstName'         => 'Henk',
+        'LastName'          => 'de Vries',
+        'LanguageLocaleKey' => 'en_US',
+        'LocaleSidKey'      => 'en_US',
+        'TimeZoneSidKey'    => 'America/Los_Angeles'
+    }
+);
 
