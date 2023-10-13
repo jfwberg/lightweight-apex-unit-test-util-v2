@@ -6,7 +6,7 @@ REM Package Create Config
 SET devHub=devHubAlias
 SET packageName=Lightweight - Apex Unit Test Util v2 (Unlocked)
 SET packageDescription=A lightweight Apex Unit Test Utility library for User creation, Exception Testing and HTTP Callout Mocking
-SET packageType=Managed
+SET packageType=Unlocked
 SET packagePath=force-app/package
 
 REM Package Config
