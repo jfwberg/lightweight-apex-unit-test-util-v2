@@ -9,15 +9,13 @@ https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-a
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.0.0-2|
-|Managed Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvUDQA0*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04t4K000002JvU8QAK*
-
-
+|Version|2.1.0-2|
+|Managed Installation URL| */packaging/installPackage.apexp?p0=04tP30000006pflIAA*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000006pUUIAY*
 
 
 # Demo
-For detailed examples see the *force-app/demo* folder. Note that teh demo files are OOTB only working with the packaged versions. To use the custom versions remove the namespace and update the class names accordingly.
+For detailed examples see the *force-app/demo* folder. Note that the demo files are OOTB only working with the packaged versions. To use the custom versions remove the namespace and update the class names accordingly.
 
 # Custom Implementation
 For an example of a custom implementation without the use of a namespace see the *force-app/custom* folder.

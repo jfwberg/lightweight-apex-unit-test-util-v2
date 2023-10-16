@@ -11,7 +11,7 @@ SET packagePath=force-app/package
 
 REM Package Config
 SET packageId=0Ho4K0000008OZISA2
-SET packageVersionId=04t4K000002JvU8QAK
+SET packageVersionId=04tP30000006pUUIAY
 
 REM Create package
 sf package create --name "%packageName%" --description "%packageDescription%" --package-type "%packageType%" --path "%packagePath%" --target-dev-hub %devHub%

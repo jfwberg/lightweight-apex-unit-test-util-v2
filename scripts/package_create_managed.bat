@@ -11,7 +11,7 @@ SET packagePath=force-app/package
 
 REM Package Config
 SET packageId=0Ho4K0000008OZDSA2
-SET packageVersionId=
+SET packageVersionId=04tP30000006pflIAA
 
 REM Create package
 sf package create --name "%packageName%" --description "%packageDescription%" --package-type "%packageType%" --path "%packagePath%" --target-dev-hub %devHub%
@@ -24,3 +24,7 @@ sf package:delete -p %packageId% --target-dev-hub %devHub% --no-prompt
 
 REM Delete package version
 sf package:version:delete -p %packageVersionId% --target-dev-hub %devHub% --no-prompt
+
+REM Promote package
+sf package:version:promote -p %packageVersionId% --target-dev-hub %devHub% --no-prompt
+
