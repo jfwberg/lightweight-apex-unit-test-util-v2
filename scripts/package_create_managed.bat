@@ -5,13 +5,13 @@ REM *****************************
 REM Package Create Config
 SET devHub=devHubAlias
 SET packageName=Lightweight - Apex Unit Test Util v2
-SET packageDescription=A lightweight Apex Unit Test Utility library for User creation, Exception Testing and HTTP Callout Mocking
+SET packageDescription=A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking
 SET packageType=Managed
 SET packagePath=force-app/package
 
 REM Package Config
 SET packageId=0Ho4K0000008OZDSA2
-SET packageVersionId=04tP30000006pflIAA
+SET packageVersionId=04tP30000007Ez7IAE
 
 REM Create package
 sf package create --name "%packageName%" --description "%packageDescription%" --package-type "%packageType%" --path "%packagePath%" --target-dev-hub %devHub%

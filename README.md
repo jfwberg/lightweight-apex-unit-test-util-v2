@@ -1,17 +1,17 @@
 # Lightweight - Apex Unit Test Util v2
 ## Description
-A lightweight Apex Unit Test Utility library for User creation, Exception Testing and HTTP Callout Mocking
+A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking
 
 ## Blog details
-https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-apex-unit-tests-958bef9c34a9
+https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-apex-unit-tests-959.0bef9c34a9
 
 ## Package info
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.1.0-2|
-|Managed Installation URL| */packaging/installPackage.apexp?p0=04tP30000006pflIAA*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000006pUUIAY*
+|Version|2.2.0-2|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007Ez7IAE*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007F3xIAE*
 
 
 # Demo
@@ -148,4 +148,24 @@ User runAsUser = createRunAsUser(
         'TimeZoneSidKey'    => 'America/Los_Angeles'
     }
 );
+```
 
+# Callable Mock Utilities
+The callable mock utilities allow you to mock a callable response from a test class.
+This allows you to not have the code you call availible in a package during testing, but
+you can still get enough code coverage and create a test scenario if required.
+
+## Test Class Methods (Implement in *test* classes only)
+```java
+    // Run from a TEST CLASS to setup the response
+    utl.Clbl.setActionResponse(String action, Object response);
+```
+
+
+## Apex Class Methods (Implement in *standard* apex classes only)
+```java
+    // Implementation in your normal code to return the Mock callable during an Apex Unit Test
+    if(Test.isRunningTest()){
+        return (Callable) utl.Clbl.getInstance();
+    }
+```

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <classAccesses>
-        <apexClass>Tst</apexClass>
+        <apexClass>Clbl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>Mck</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>Tst</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Permissions to the Apex Unit Test v2 Package Apex classes</description>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Apex Unit Test Util v2</label>
+    <label>Lightweight - Apex Unit Test Util v2</label>
 </PermissionSet>

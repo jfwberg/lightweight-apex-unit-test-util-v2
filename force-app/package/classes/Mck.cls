@@ -156,11 +156,15 @@ global with sharing class Mck implements HttpCalloutMock{
      **                                          INTERFACE METHODS                                           **
      ** **************************************************************************************************** **/
     /**
-     * @description Interface method representing the mock response
+     * @description Interface method representing the mock response, this is made global
+     *              so it can be leveraged directly as well, without the need for using the
+     *              Test.setMock() method. This is useful when you do callouts from a managed package
+     *              and makes the implmentation more versatile
+     * @example     (!Test.isRunningTest()) ? new Http().send(request) : utl.Mck.getInstance().respond(request)
      * @param req The HTTP request object
      * @return      The mocked HttpResponse
      */
-    public HttpResponse respond(HttpRequest req){
+    global HttpResponse respond(HttpRequest req){
 
         // Validate a response Id is set, if not throw an error
         if(this.responseIdentifier == null){

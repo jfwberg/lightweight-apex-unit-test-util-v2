@@ -8,6 +8,10 @@
         <apexClass>HttpMockUtil</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>CallableMockUtil</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <description>Permissions to the Apex Unit Test v2 Package Apex classes</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Apex Unit Test Util v2</label>
