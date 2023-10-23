@@ -12,7 +12,7 @@
         <apexClass>Tst</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Permissions to the Apex Unit Test v2 Package Apex classes</description>
+    <description>Permissions for the the Apex Unit Test v2 Package Apex classes</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Lightweight - Apex Unit Test Util v2</label>
 </PermissionSet>

@@ -39,11 +39,11 @@ global with sharing class Tst {
      **                                           GLOBAL CONSTANTS                                           **
      ** **************************************************************************************************** **/
     // Test related constant
-    global static final String TEST_SR_NAME = 'Apex_Unit_Test_Util_v2';
+    global static final String TEST_SR_NAME = 'Lightweight_Apex_Unit_Test_Util_v2';
     global static final String TEST_SR_BODY = 'The quick brown fox jumps over the lazy dog';
 
     // The name of the permission set for this package
-    global static final String PERMISSION_SET_NAME = 'Apex_Unit_Test_Util_v2';
+    global static final String PERMISSION_SET_NAME = 'Lightweight_Apex_Unit_Test_Util_v2';
 
     // User related variables
     global static final String STANDARD_USER_PROFILE  = 'Standard User';
@@ -62,7 +62,7 @@ global with sharing class Tst {
     // (Error) messages
     @TestVisible private static final String STATIC_RESOURCE_ERROR         = 'No static resource with the name "{0}" found in the metadata';
     @TestVisible private static final String PROFILE_DOES_NOT_EXIST_ERROR  = 'No profile with the name "{0}" found in the metadata';
-    @TestVisible private static final String PERM_SET_DOES_NOT_EXIST_ERROR = 'No all permission sets were found in the metadata: {0} provided but {1} found.';
+    @TestVisible private static final String PERM_SET_DOES_NOT_EXIST_ERROR = 'Not all permission sets were found in the metadata: {0} provided but {1} found.';
     @TestVisible private static final String TEST_METHOD_ONLY_ERROR        = 'This method can ONLY be invoked through a test method.';
     @TestVisible private final static String INVALID_FIELD_VALUE_MAP_FIELD = 'Error when creating the run as user. The field "{0}" does not exist on sObject "{1}"';
 
