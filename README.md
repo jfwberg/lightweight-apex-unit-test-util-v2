@@ -9,9 +9,9 @@ https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-a
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.2.0-2|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007Ez7IAE*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007F3xIAE*
+|Version|2.3.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007oePIAQ*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007og1IAA*
 
 
 # Demo
