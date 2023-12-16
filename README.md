@@ -3,7 +3,14 @@
 A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking
 
 ## Blog details
-https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-apex-unit-tests-959.0bef9c34a9
+**Advanced Exception Testing**
+https://medium.com/@justusvandenberg/advanced-exception-handling-in-salesforce-apex-unit-tests-958bef9c34a9
+
+**Callable Interface Testing**
+https://medium.com/@justusvandenberg/testing-apex-callable-interface-dependencies-in-salesforce-unit-tests-db039342db22
+
+**Testing Callouts**
+Coming soon...
 
 ## Package info
 | Info | Value |
