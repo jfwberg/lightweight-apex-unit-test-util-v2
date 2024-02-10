@@ -16,9 +16,9 @@ Coming soon...
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.3.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007oePIAQ*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007og1IAA*
+|Version|2.4.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000M6OXIA0*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000M6Q9IAK*
 
 
 # Demo

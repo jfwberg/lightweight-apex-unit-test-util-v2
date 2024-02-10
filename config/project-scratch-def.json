@@ -1,6 +1,6 @@
 {
 	"orgName": "Lightweight - Apex Unit Test Util v2",
-	"edition": "Developer",
+	"edition": "Enterprise",
 	"features": [
 		"EnableSetPasswordInApi",
         "PersonAccounts",
