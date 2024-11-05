@@ -16,10 +16,9 @@ Coming soon...
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.4.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000M6OXIA0*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000M6Q9IAK*
-
+|Version|2.5.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000rUmLIAU*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000rUpZIAU*
 
 # Demo
 For detailed examples see the *force-app/demo* folder. Note that the demo files are OOTB only working with the packaged versions. To use the custom versions remove the namespace and update the class names accordingly.

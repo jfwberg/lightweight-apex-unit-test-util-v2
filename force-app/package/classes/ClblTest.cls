@@ -1,7 +1,7 @@
 /**
  * @author         Justus van den Berg (jfwberg@gmail.com)
  * @date           October 2023
- * @copyright      (c) 2023 Justus van den Berg
+ * @copyright      (c) 2024 Justus van den Berg
  * @license        MIT (See LICENSE file in the project root)
  * @description    Unit tests for the "Clbl" Apex Class
  */

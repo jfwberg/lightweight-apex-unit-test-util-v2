@@ -4,24 +4,24 @@
       "path": "force-app/package",
       "default": true,
       "package": "Lightweight - Apex Unit Test Util v2",
-      "versionName": "v60.0 - 2.4",
-      "versionNumber": "2.4.0.NEXT",
+      "versionName": "v62.0 - 2.5",
+      "versionNumber": "2.5.0.NEXT",
       "versionDescription": "A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking",
-      "ancestorVersion": "2.3.0"
+      "ancestorVersion": "2.4.0"
     },
     {
       "path": "force-app/package",
       "default": false,
       "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)",
-      "versionName": "v60.0 - 2.4",
-      "versionNumber": "2.4.0.NEXT",
+      "versionName": "v62.0 - 2.5",
+      "versionNumber": "2.5.0.NEXT",
       "versionDescription": "A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking"
     }
   ],
   "name": "lightweight-apex-unit-test-util-v2",
   "namespace": "utl",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "60.0",
+  "sourceApiVersion": "62.0",
   "packageAliases": {
     "Lightweight - Apex Unit Test Util v2": "0Ho4K0000008OZDSA2",
     "Lightweight - Apex Unit Test Util v2@2.0.0-2": "04t4K000002JvUDQA0",
@@ -34,6 +34,8 @@
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.2.0-1": "04tP30000007F3xIAE",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.3.0-1": "04tP30000007og1IAA",
     "Lightweight - Apex Unit Test Util v2@2.4.0-1": "04tP3000000M6OXIA0",
-    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.4.0-1": "04tP3000000M6Q9IAK"
+    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.4.0-1": "04tP3000000M6Q9IAK",
+    "Lightweight - Apex Unit Test Util v2@2.5.0-1": "04tP3000000rUmLIAU",
+    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.5.0-1": "04tP3000000rUpZIAU"
   }
 }

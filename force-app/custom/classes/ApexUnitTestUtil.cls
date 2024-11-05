@@ -1,7 +1,7 @@
 /**
  * @author         Justus van den Berg (jfwberg@gmail.com)
  * @date           August 2023
- * @copyright      (c) 2023 Justus van den Berg
+ * @copyright      (c) 2024 Justus van den Berg
  * @license        MIT (See LICENSE file in the project root)
  * @description    Class that contains a set of Apex Unit Test Utilities:
  *                 - Test Run As User Creation Utils
@@ -17,7 +17,7 @@
  * @note           This class optimised for use outside of a namespaced package and all global references have been
  *                 removed in favour of @TestVisible annotations
  */
-@SuppressWarnings('PMD.CyclomaticComplexity')
+@SuppressWarnings('PMD.CyclomaticComplexity, PMD.CognitiveComplexity')
 public with sharing class ApexUnitTestUtil {
 
     /** **************************************************************************************************** **
@@ -103,6 +103,7 @@ public with sharing class ApexUnitTestUtil {
      ** **************************************************************************************************** **/
     /**
      * @description Method to that returns the default forced exception message
+     * @return      The forced exception message constant value
      */
     @TestVisible
     private static String getForcedExceptionMessage(){

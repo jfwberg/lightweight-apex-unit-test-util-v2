@@ -1,7 +1,7 @@
 /**
  * @author         Justus van den Berg (jfwberg@gmail.com)
  * @date           August 2023
- * @copyright      (c) 2023 Justus van den Berg
+ * @copyright      (c) 2024 Justus van den Berg
  * @license        MIT (See LICENSE file in the project root)
  * @description    Class that contains a set of Apex Unit Test Utilities to create a generic,
  *                 reusable HTTP Callout Mock that:

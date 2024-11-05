@@ -1,7 +1,7 @@
 /**
  * @author         Justus van den Berg (jfwberg@gmail.com)
  * @date           August 2023
- * @copyright      (c) 2023 Justus van den Berg
+ * @copyright      (c) 2024 Justus van den Berg
  * @license        MIT (See LICENSE file in the project root)
  * @description    Class that contains a set of Apex Unit Test Utilities:
  *                 - Test Run As User Creation Utils
@@ -14,11 +14,13 @@
  *                                          utility for global use.
  * @false-positive PMD.CyclomaticComplexity The class has a lot of methods, those combined makes it
  *                                          OK for this one
+ * @false-positive PMD.CognitiveComplexity  The class has a lot of methods, with only a few if statements
+ *                                          each, so this one is acceptable imho
  * @note           This class is to be used in a managed package and contains Global methods that
  *                 should be made public or private in org based implementations or unlocked
  *                 packages
  */
-@SuppressWarnings('PMD.AvoidGlobalModifier, PMD.CyclomaticComplexity')
+@SuppressWarnings('PMD.AvoidGlobalModifier, PMD.CyclomaticComplexity, PMD.CognitiveComplexity')
 global with sharing class Tst {
 
     /** **************************************************************************************************** **
@@ -104,6 +106,7 @@ global with sharing class Tst {
      ** **************************************************************************************************** **/
     /**
      * @description Method to that returns the default forced exception message
+     * @return      The forced exception message constant value
      */
     global static String getForcedExceptionMessage(){
         

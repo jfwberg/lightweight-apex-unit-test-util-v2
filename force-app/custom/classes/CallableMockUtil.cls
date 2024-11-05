@@ -2,7 +2,7 @@
 /**
  * @author         Justus van den Berg (jfwberg@gmail.com)
  * @date           October 2023
- * @copyright      (c) 2023 Justus van den Berg
+ * @copyright      (c) 2024 Justus van den Berg
  * @license        MIT (See LICENSE file in the project root)
  * @description    Class that contains a set of Apex Unit Test Utilities to create a generic,
  *                 reusable Callable Mock that allows for testing responses from classes
@@ -50,8 +50,10 @@ public class CallableMockUtil implements Callable{
      **                                        TEST CLASS SETTERS                                            **
      ** **************************************************************************************************** **/
     /**
-     * @Description Method to add an action with matching response to the mock
+     * @description Method to add an action with matching response to the mock
      *              This method should be imlemented in TEST methods only
+     * @param action    The name of the callable action
+     * @param response  The response to be returned by the mock
      */
     @TestVisible
     private static void setActionResponse(String action, Object response){
@@ -65,6 +67,7 @@ public class CallableMockUtil implements Callable{
     /**
      * @description Method to return the Mock Instance of the Callable
      *              Implement this in your "Normal" apex classes
+     * @return      The instance of the CallableMockUtil class
      * @example     if(Test.isRunningTest()){return (Callable) utl.CallableMockUtil.getInstance();}
      */
     public static CallableMockUtil getInstance(){
