@@ -54,7 +54,7 @@ utl.Mck.addResponse(IDENTIFIER_NAME, 200, 'responseBody', new Map<String,String>
 // Force an exception 
 utl.Tst.forceException(IDENTIFIER_NAME);
 
-// Force a Boolean that is resturn TRUE
+// Force a Boolean that is return TRUE
 Boolean result = utl.Tst.forceCondition(IDENTIFIER_NAME);
 ```
 
@@ -79,7 +79,7 @@ Tst.removeForcedCondition(IDENTIFIER_NAME);
 String message = utl.Tst.getForcedExceptionMessage();
 
 // The method will throw an exception. Place this method in your test class after 
-// the code that should throw an exception.If your code does not throw an exception, the test fails.
+// the code that should throw an exception. If your code does not throw an exception, the test fails.
 // This method will fail the test as it should not be reached
 utl.Tst.assertExceptionHasBeenThrow();
 
@@ -130,10 +130,10 @@ User runAsUser = Tst.createRunAsUser(
 );
 
 
-// Method and overload methods to create a new User with a profile and multiple permission sets
+// Permission Sets and Permission Set Groups can be mixed - they share the API name pool
 User runAsUser = Tst.createRunAsUser(
     PROFILE_NAME,
-    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO}
+    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO, PERMISSION_SET_GROUP_ONE, PERMISSION_SET_GROUP_TWO}
 );
 
 // Method and overload methods to create a new User with a profile and multiple permission sets
@@ -167,7 +167,7 @@ User runAsUser = createRunAsUser(
 
 # Callable Mock Utilities
 The callable mock utilities allow you to mock a callable response from a test class.
-This allows you to not have the code you call availible in a package during testing, but
+This allows you to not have the code you call available in a package during testing, but
 you can still get enough code coverage and create a test scenario if required.
 
 ## Test Class Methods (Implement in *test* classes only)

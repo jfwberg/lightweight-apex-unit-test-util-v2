@@ -105,7 +105,7 @@ private with sharing class HttpMockUtilTest {
 
             }catch(Exception e){
                 // Assert the error message
-                ApexUnitTestUtil.assertExceptionMessage(HttpMockUtil.MSG_NO_REPONSE_ID, e);
+                ApexUnitTestUtil.assertExceptionMessage(HttpMockUtil.MSG_NO_RESPONSE_ID, e);
             }
 
 
@@ -119,7 +119,7 @@ private with sharing class HttpMockUtilTest {
 
             }catch(Exception e){
                 // Assert the error message
-                ApexUnitTestUtil.assertExceptionMessage(HttpMockUtil.MSG_INVALID_REPONSE_ID, 'INVALID_IDENTIFIER', e);   
+                ApexUnitTestUtil.assertExceptionMessage(HttpMockUtil.MSG_INVALID_RESPONSE_ID, 'INVALID_IDENTIFIER', e);   
             }        
         }
         Test.stopTest();

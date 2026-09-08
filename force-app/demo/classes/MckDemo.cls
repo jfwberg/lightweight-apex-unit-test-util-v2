@@ -69,7 +69,7 @@ public with sharing class MckDemo {
         // Execute the request and add request to the list
         responses.add(new HTTP().send(request3).getBody());
 
-        // Returnt he list with response bodies
+        // Return the list with response bodies
         return responses;
     }
 }

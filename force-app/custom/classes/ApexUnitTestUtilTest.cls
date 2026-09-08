@@ -11,6 +11,54 @@
 @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts')
 private with sharing class ApexUnitTestUtilTest {
 
+    private static List<PermissionSet> createTestPermissionSets(List<String> names){
+        List<PermissionSet> permissionSets = new List<PermissionSet>();
+        for(String name : names){
+            permissionSets.add(new PermissionSet(
+                Name = name,
+                Label = name
+            ));
+        }
+        insert permissionSets;
+        return permissionSets;
+    }
+
+    private static List<PermissionSetGroup> createTestPermissionSetGroups(List<String> names){
+        List<PermissionSetGroup> permissionSetGroups = new List<PermissionSetGroup>();
+        for(String name : names){
+            permissionSetGroups.add(new PermissionSetGroup(
+                DeveloperName = name,
+                MasterLabel = name
+            ));
+        }
+        insert permissionSetGroups;
+        return permissionSetGroups;
+    }
+
+    private class PermissionAssignmentCounts {
+        Integer directPermissionSetCount = 0;
+        Integer permissionSetGroupCount = 0;
+    }
+
+    private static PermissionAssignmentCounts getPermissionAssignmentCounts(Id assigneeId){
+        PermissionAssignmentCounts counts = new PermissionAssignmentCounts();
+
+        for(PermissionSetAssignment psa : [
+            SELECT PermissionSetGroupId
+            FROM PermissionSetAssignment
+            WHERE AssigneeId = :assigneeId
+            AND PermissionSet.IsOwnedByProfile = FALSE
+        ]){
+            if(psa.PermissionSetGroupId != null){
+                ++counts.permissionSetGroupCount;
+            }else {
+                ++counts.directPermissionSetCount;
+            }
+        }
+
+        return counts;
+    }
+
     /** **************************************************************************************************** **
 	 **                                          PRIVATE CONSTANTS                                           **
 	 ** **************************************************************************************************** **/
@@ -44,7 +92,7 @@ private with sharing class ApexUnitTestUtilTest {
 
             }catch(ApexUnitTestUtil.ForcedException e){
 
-                // Test the standard forced exception message has been trhown
+                // Test the standard forced exception message has been thrown
                 ApexUnitTestUtil.assertForcedExceptionMessage(e);
             }
 
@@ -115,12 +163,188 @@ private with sharing class ApexUnitTestUtilTest {
         System.runAs(ApexUnitTestUtil.getRunningUser()){
             // Create a user that has no permission sets
             User testUser = ApexUnitTestUtil.createRunAsUser(ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE);
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
 
             // Check that no permission sets are assigned for the newly created user
             Assert.areEqual(
                 0,
-                [SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :testUser.Id AND PermissionSet.IsOwnedByProfile = false],
-                'Expected no permission sets to exists'
+                counts.directPermissionSetCount,
+                'Expected no direct permission set assignments'
+            );
+
+            Assert.areEqual(
+                0,
+                counts.permissionSetGroupCount,
+                'Expected no permission set group assignments'
+            );
+        }
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testCreateUserWithSinglePermissionSet(){
+        Test.startTest();
+        System.runAs(ApexUnitTestUtil.getRunningUser()){
+            List<PermissionSet> permissionSets = createTestPermissionSets(
+                new List<String>{'ApexUtilSinglePS'}
+            );
+
+            // Create a user with one permission set
+            User testUser = ApexUnitTestUtil.createRunAsUser(
+                ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE,
+                new String[]{permissionSets[0].Name}
+            );
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
+
+            // Check that one permission set is assigned for the newly created user
+            Assert.areEqual(
+                1,
+                counts.directPermissionSetCount,
+                'Expected one permission set assignment'
+            );
+
+            Assert.areEqual(
+                0,
+                counts.permissionSetGroupCount,
+                'Expected no permission set group assignments'
+            );
+        }
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testCreateUserWithMultiplePermissionSets(){
+        Test.startTest();
+        System.runAs(ApexUnitTestUtil.getRunningUser()){
+            List<PermissionSet> permissionSets = createTestPermissionSets(
+                new List<String>{'ApexUtilMultiPS1', 'ApexUtilMultiPS2'}
+            );
+
+            // Create a user with two permission sets
+            User testUser = ApexUnitTestUtil.createRunAsUser(
+                ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE,
+                new String[]{permissionSets[0].Name, permissionSets[1].Name}
+            );
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
+
+            // Check that two permission sets are assigned for the newly created user
+            Assert.areEqual(
+                2,
+                counts.directPermissionSetCount,
+                'Expected two permission set assignments'
+            );
+
+            Assert.areEqual(
+                0,
+                counts.permissionSetGroupCount,
+                'Expected no permission set group assignments'
+            );
+        }
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testCreateUserWithSinglePermissionSetGroup(){
+        Test.startTest();
+        System.runAs(ApexUnitTestUtil.getRunningUser()){
+            List<PermissionSetGroup> permissionSetGroups = createTestPermissionSetGroups(
+                new List<String>{'ApexUtilSinglePSG'}
+            );
+
+            // Create a user with one permission set group
+            User testUser = ApexUnitTestUtil.createRunAsUser(
+                ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE,
+                new String[]{permissionSetGroups[0].DeveloperName}
+            );
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
+
+            // Check that one permission set group is assigned for the newly created user
+            Assert.areEqual(
+                1,
+                counts.permissionSetGroupCount,
+                'Expected one permission set group assignment'
+            );
+
+            Assert.areEqual(
+                0,
+                counts.directPermissionSetCount,
+                'Expected no direct permission set assignments'
+            );
+        }
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testCreateUserWithMultiplePermissionSetGroups(){
+        Test.startTest();
+        System.runAs(ApexUnitTestUtil.getRunningUser()){
+            List<PermissionSetGroup> permissionSetGroups = createTestPermissionSetGroups(
+                new List<String>{'ApexUtilMultiPSG1', 'ApexUtilMultiPSG2'}
+            );
+
+            // Create a user with two permission set groups
+            User testUser = ApexUnitTestUtil.createRunAsUser(
+                ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE,
+                new String[]{permissionSetGroups[0].DeveloperName, permissionSetGroups[1].DeveloperName}
+            );
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
+
+            // Check that two permission set groups are assigned for the newly created user
+            Assert.areEqual(
+                2,
+                counts.permissionSetGroupCount,
+                'Expected two permission set group assignments'
+            );
+
+            Assert.areEqual(
+                0,
+                counts.directPermissionSetCount,
+                'Expected no direct permission set assignments'
+            );
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testCreateUserWithPermissionSetsAndPermissionSetGroups(){
+        Test.startTest();
+        System.runAs(ApexUnitTestUtil.getRunningUser()){
+            List<PermissionSet> permissionSets = createTestPermissionSets(
+                new List<String>{'ApexUtilMixPS1', 'ApexUtilMixPS2', 'ApexUtilMixPS3'}
+            );
+            List<PermissionSetGroup> permissionSetGroups = createTestPermissionSetGroups(
+                new List<String>{'ApexUtilMixPSG1', 'ApexUtilMixPSG2'}
+            );
+
+            // Create a user with mixed permission sets and permission set groups
+            User testUser = ApexUnitTestUtil.createRunAsUser(
+                ApexUnitTestUtil.MINIMUM_ACCESS_PROFILE,
+                new String[]{
+                    permissionSets[0].Name,
+                    permissionSetGroups[0].DeveloperName,
+                    permissionSets[1].Name,
+                    permissionSetGroups[1].DeveloperName,
+                    permissionSets[2].Name
+                }
+            );
+            PermissionAssignmentCounts counts = getPermissionAssignmentCounts(testUser.Id);
+
+
+            // Check that direct permission set and permission set group assignments are both present
+            Assert.areEqual(
+                3,
+                counts.directPermissionSetCount,
+                'Expected three direct permission set assignments'
+            );
+
+            Assert.areEqual(
+                2,
+                counts.permissionSetGroupCount,
+                'Expected two permission set group assignments'
             );
         }
         Test.stopTest();

@@ -42,8 +42,8 @@ global with sharing class Mck implements HttpCalloutMock{
      **                                          PRIVATE CONSTANTS                                           **
      ** **************************************************************************************************** **/
     // Messages
-    @TestVisible private static final String MSG_NO_REPONSE_ID      = 'No Response Identifier found: Please set a valid Mock response Identifier (i.e. Mck.setResponseIdentifier(\'MOCK_ID_NAME\');) before executing the http callout. Either in the test class or in the main code.';
-    @TestVisible private static final String MSG_INVALID_REPONSE_ID = 'Invalid Response Id: Supplied Response Id "{0}" does not exist in the response map. Please set a valid response (i.e. Mck.addResponse([id], [status code],[body],[headerMap]);), before executing the http callout. Needs to be set in the test class.';
+    @TestVisible private static final String MSG_NO_RESPONSE_ID      = 'No Response Identifier found: Please set a valid Mock response Identifier (i.e. Mck.setResponseIdentifier(\'MOCK_ID_NAME\');) before executing the http callout. Either in the test class or in the main code.';
+    @TestVisible private static final String MSG_INVALID_RESPONSE_ID = 'Invalid Response Id: Supplied Response Id "{0}" does not exist in the response map. Please set a valid response (i.e. Mck.addResponse([id], [status code],[body],[headerMap]);), before executing the http callout. Needs to be set in the test class.';
 
 
     /** **************************************************************************************************** **
@@ -89,7 +89,7 @@ global with sharing class Mck implements HttpCalloutMock{
     /**
      * @description OVERLOAD Method to combine the adding and setting of the response Id in a single method
      *              This should be used when there is only a single HTTP Call in the test
-     * @param responseBody The content body of the expected webservice reponse
+     * @param responseBody The content body of the expected webservice response
      */
     global static void setResponse(String responseBody){
         setResponse(null, responseBody, null);
@@ -99,8 +99,8 @@ global with sharing class Mck implements HttpCalloutMock{
     /**
      * @description OVERLOAD Method to combine the adding and setting of the response Id in a single method
      *              This should be used when there is only a single HTTP Call in the test
-     * @param responseStatusCode The status code of the expected webservice reponse (default 200)
-     * @param responseBody       The content body of the expected webservice reponse
+     * @param responseStatusCode The status code of the expected webservice response (default 200)
+     * @param responseBody       The content body of the expected webservice response
      */
     global static void setResponse(Integer responseStatusCode, String responseBody){
         setResponse(responseStatusCode, responseBody, null);
@@ -110,9 +110,9 @@ global with sharing class Mck implements HttpCalloutMock{
     /**
      * @description Method to combine the adding and setting of the response Id in a single method
      *              This should be used when there is only a single HTTP Call in the test
-     * @param responseStatusCode The status code of the expected webservice reponse (default 200)
-     * @param responseBody       The content body of the expected webservice reponse
-     * @param responseHeaders    The headers of the expected webservice reponse
+     * @param responseStatusCode The status code of the expected webservice response (default 200)
+     * @param responseBody       The content body of the expected webservice response
+     * @param responseHeaders    The headers of the expected webservice response
      */
     global static void setResponse(Integer responseStatusCode, String responseBody, Map<String,String> responseHeaders){
         setResponseIdentifier('default');
@@ -123,8 +123,8 @@ global with sharing class Mck implements HttpCalloutMock{
     /**
      * @description OVERLOAD Method to add a test response to the response map
      * @param responseIdentifier The ID of the Mck
-     * @param responseStatusCode The status code of the expected webservice reponse (default 200)
-     * @param responseBody       The content body of the expected webservice reponse
+     * @param responseStatusCode The status code of the expected webservice response (default 200)
+     * @param responseBody       The content body of the expected webservice response
      */
     global static void addResponse(String responseIdentifier, Integer responseStatusCode, String responseBody){
         addResponse(responseIdentifier, responseStatusCode, responseBody, null);
@@ -135,9 +135,9 @@ global with sharing class Mck implements HttpCalloutMock{
      * @description Method to add a test response to the response map
      *              Overload method in order to add custom headers
      * @param responseIdentifier The ID of the Mck
-     * @param responseStatusCode The status code of the expected webservice reponse (default 200)
-     * @param responseBody       The content body of the expected webservice reponse
-     * @param responseHeaders    The headers of the expected webservice reponse
+     * @param responseStatusCode The status code of the expected webservice response (default 200)
+     * @param responseBody       The content body of the expected webservice response
+     * @param responseHeaders    The headers of the expected webservice response
      */
     @SuppressWarnings('PMD.ExcessiveParameterList')
     global static void addResponse(String responseIdentifier, Integer responseStatusCode, String responseBody, Map<String,String> responseHeaders){
@@ -168,12 +168,12 @@ global with sharing class Mck implements HttpCalloutMock{
 
         // Validate a response Id is set, if not throw an error
         if(this.responseIdentifier == null){
-            throw new MockResponseException(Mck.MSG_NO_REPONSE_ID);
+            throw new MockResponseException(Mck.MSG_NO_RESPONSE_ID);
         }
 
         // Validate a response object exists for the response Id
         if(!this.responseMap.containsKey(responseIdentifier)){
-            throw new MockResponseException(String.format(Mck.MSG_INVALID_REPONSE_ID, new String[]{String.valueOf(responseIdentifier)}));
+            throw new MockResponseException(String.format(Mck.MSG_INVALID_RESPONSE_ID, new String[]{String.valueOf(responseIdentifier)}));
         }
 
         // Create the mock response object
@@ -185,7 +185,7 @@ global with sharing class Mck implements HttpCalloutMock{
         // Set the response body
         res.setBody(this.responseMap.get(responseIdentifier).getBody());
 
-        // Set reponse headers
+        // Set response headers
         for(String key : responseMap.get(responseIdentifier).getHeaders().keySet()){
             res.setHeader(key, responseMap.get(responseIdentifier).headers.get(key));
         }
@@ -199,7 +199,7 @@ global with sharing class Mck implements HttpCalloutMock{
      **                                    PRIVATE DATA STRUCTURE CLASSES                                    **
      ** **************************************************************************************************** **/
     /**
-     * @description A Class representing a Mock Http response data stucture
+     * @description A Class representing a Mock Http response data structure
      */
     @TestVisible
     @JsonAccess(serializable='never' deserializable='never')
@@ -213,7 +213,7 @@ global with sharing class Mck implements HttpCalloutMock{
 
         /**
          * @description Constructor for the use of custom headers in the mock response
-         * @param statusCode The HTTP Status code used in the reponse
+         * @param statusCode The HTTP Status code used in the response
          * @param body       The response body content
          * @param headers    Custom headers for the response 
          */

@@ -551,23 +551,43 @@ global with sharing class Tst {
 
         // Create a list to hold the permission set(s) that are to be applied to the running as
         PermissionSetAssignment[] permissionSetAssignments = new PermissionSetAssignment[]{};
+        // Deduplicate.
+        Set<String> pendingPermissionSetNames = new Set<String>(permissionSetNames);
+        final Integer providedPermissionSetCount = pendingPermissionSetNames.size();
 
-        // Query permission sets and, if permission set value equals null do not query but just get a new list
-        for (PermissionSet permissionSet : [SELECT Id FROM PermissionSet WHERE Name IN :permissionSetNames WITH SYSTEM_MODE LIMIT 100 ]){
+        // PSG creates a technical PS with the same API name. Thus, PSG assignments take precedence.
+        // https://help.salesforce.com/s/articleView?id=005393365&type=1
+        for (PermissionSetGroup psg : [SELECT Id, DeveloperName FROM PermissionSetGroup WHERE DeveloperName IN :pendingPermissionSetNames WITH SYSTEM_MODE]){
+            pendingPermissionSetNames.remove(psg.DeveloperName);
+            permissionSetAssignments.add(
+                new PermissionSetAssignment(
+                    AssigneeId            = runAsUser.Id,
+                    PermissionSetGroupId  = psg.Id
+                )
+            );
+        }
+
+        // Assign PS for still-pending names only.
+        for (PermissionSet ps : [SELECT Id, Name FROM PermissionSet WHERE Name IN :pendingPermissionSetNames AND IsOwnedByProfile = FALSE WITH SYSTEM_MODE]){
+            pendingPermissionSetNames.remove(ps.Name);
             permissionSetAssignments.add(
                 new PermissionSetAssignment(
                     AssigneeId      = runAsUser.Id,
-                    PermissionSetId = permissionSet.Id
+                    PermissionSetId = ps.Id
                 )
             );
         }
 
         // Tell the user that not all permission sets were found
-        if(permissionSetAssignments.size() != permissionSetNames.size()){
+        final Integer foundPermissionSetCount = permissionSetAssignments.size();
+        if(foundPermissionSetCount != providedPermissionSetCount){
             throw new InvalidDataException(
                 String.format(
                     PERM_SET_DOES_NOT_EXIST_ERROR,
-                    new String[]{String.valueOf(permissionSetNames.size()),String.valueOf(permissionSetAssignments.size())}
+                    new String[]{
+                        String.valueOf(providedPermissionSetCount),
+                        String.valueOf(foundPermissionSetCount)
+                    }
                 )
             );
         }

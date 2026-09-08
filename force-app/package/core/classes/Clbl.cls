@@ -56,7 +56,7 @@ global class Clbl implements Callable{
      ** **************************************************************************************************** **/
     /**
      * @description Method to add an action with matching response to the mock
-     *              This method should be imlemented in TEST methods only
+     *              This method should be implemented in TEST methods only
      * @param action    The name of the callable action
      * @param response  The response to be returned by the mock
      */

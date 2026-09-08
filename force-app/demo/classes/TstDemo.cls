@@ -69,7 +69,7 @@ public with sharing class TstDemo {
     /**
      * @description An example implementation of the assertExceptionMessage() method
      *              that has multiple parameters
-     * @param param1 The first parameter in the exceptino message ({0})
+     * @param param1 The first parameter in the exception message ({0})
      */
     public static void throwExceptionWithSingleParameter(String param1){
         throw new StringException(
@@ -84,8 +84,8 @@ public with sharing class TstDemo {
     /**
      * @description An example implementation of the assertExceptionMessage() method
      *              that has multiple parameters
-     * @param param1 The first parameter in the exceptino message ({0})
-     * @param param2 The second parameter in the exceptino message ({1})
+     * @param param1 The first parameter in the exception message ({0})
+     * @param param2 The second parameter in the exception message ({1})
      */
     public static void throwExceptionWithTwoParameters(String param1, String param2){
         throw new StringException(
