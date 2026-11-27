@@ -137,7 +137,7 @@ User runAsUser = Tst.createRunAsUser(
 );
 
 // Method and overload methods to create a new User with a profile and multiple permission sets
-// and the ability to override any fields on the User record.
+// and the ability to override any fields (by their API names) on the User record.
 User runAsUser = createRunAsUser(
     PROFILE_NAME,
     new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO},
@@ -147,6 +147,20 @@ User runAsUser = createRunAsUser(
         'LanguageLocaleKey' => 'en_US',
         'LocaleSidKey'      => 'en_US',
         'TimeZoneSidKey'    => 'America/Los_Angeles'
+    }
+);
+
+// Method and overload methods to create a new User with a profile and multiple permission sets
+// and the ability to override any fields (as SObjectFields) on the User record.
+User runAsUser = createRunAsUser(
+    PROFILE_NAME,
+    new String[]{PERMISSION_SET_ONE, PERMISSION_SET_TWO},
+    new Map<SObjectField,Object>{
+        User.FirstName         => 'Henk',
+        User.LastName          => 'de Vries',
+        User.LanguageLocaleKey => 'en_US',
+        User.LocaleSidKey      => 'en_US',
+        User.TimeZoneSidKey    => 'America/Los_Angeles'
     }
 );
 ```

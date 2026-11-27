@@ -3,7 +3,7 @@
 public with sharing class TstDemoTest {
 
     /** **************************************************************************************************** **
-     **                                      EXCEPTION UTILIY METHODS                                        **
+     **                                      EXCEPTION UTILITY METHODS                                        **
      ** **************************************************************************************************** **/
     /**
      * @description Method to test difficult to reach or impossible to reach exception
@@ -154,7 +154,7 @@ public with sharing class TstDemoTest {
     
 
     /** **************************************************************************************************** **
-     **                                          USER UTILIY METHODS                                         **
+     **                                          USER UTILITY METHODS                                         **
      ** **************************************************************************************************** **/
     /**
      * @description Method create a TEST user with a minimum access profile that we can use for run as
@@ -170,7 +170,7 @@ public with sharing class TstDemoTest {
 
         Test.startTest();
         System.runAs(testUser){
-            Assert.areEqual(true, true);
+            Assert.isTrue(true);
         }
         Test.stopTest();
         
@@ -192,7 +192,7 @@ public with sharing class TstDemoTest {
 
         Test.startTest();
         System.runAs(testUser){
-            Assert.areEqual(true, true);
+            Assert.isTrue(true);
         }
         Test.stopTest();
         
@@ -213,7 +213,7 @@ public with sharing class TstDemoTest {
 
         Test.startTest();
         System.runAs(testUser){
-            Assert.areEqual(true, true);
+            Assert.isTrue(true);
         }
         Test.stopTest();  
     }
@@ -239,7 +239,7 @@ public with sharing class TstDemoTest {
 
         Test.startTest();
         System.runAs(testUser){
-            Assert.areEqual(true, true);
+            Assert.isTrue(true);
         }
         Test.stopTest();
     }

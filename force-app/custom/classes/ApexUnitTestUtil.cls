@@ -184,7 +184,7 @@ public with sharing class ApexUnitTestUtil {
     @TestVisible
     private static void assertExceptionHasBeenThrow(){
         // Throw a safety message unless overwritted
-        Assert.areEqual(true, safetyOverride, SAFETY_MESSAGE);
+        Assert.isTrue(safetyOverride, SAFETY_MESSAGE);
     }
 
 
@@ -292,7 +292,7 @@ public with sharing class ApexUnitTestUtil {
 
 
     /** **************************************************************************************************** **
-     **                                     GLOBAL USER UTILIY METHODS                                       **
+     **                                     GLOBAL USER UTILITY METHODS                                       **
      ** **************************************************************************************************** **/
      /**
      * @description Method to create a run as user without any permission sets
@@ -302,7 +302,7 @@ public with sharing class ApexUnitTestUtil {
     @TestVisible
     private static User createRunAsUser(String profileName){
         // Create the run as user
-        return createRunAsUser(profileName, null, null);
+        return createRunAsUser(profileName, null, (Map<String, Object>)null);
     }
 
 
@@ -328,12 +328,12 @@ public with sharing class ApexUnitTestUtil {
     @TestVisible
     private static User createRunAsUser(String profileName, String[] permissionSetNames){        
         // Create the run as user
-        return createRunAsUser(profileName, permissionSetNames, null);
+        return createRunAsUser(profileName, permissionSetNames, (Map<String, Object>)null);
     }
 
 
     /**
-     * @description Method to create a run as user with  permission sets and field overrides
+     * @description Method to create a run as user with permission sets and field overrides
      * @param       profileName        The (api) name of the Profile
      * @param       permissionSetNames The (api) names of the Permission Sets
      * @param       fieldOverrides     A map that contains custom field values for the user
@@ -341,6 +341,53 @@ public with sharing class ApexUnitTestUtil {
      */
     @TestVisible
     private static User createRunAsUser(String profileName, String[] permissionSetNames, Map<String,Object> fieldOverrides){
+        // Create a new user
+        User runAsUser = createUserWithProfile(profileName);
+
+        // If there are any default field values that need to be overwritten do it here
+        populateSObjectValuesFromMapData(runAsUser,fieldOverrides);
+
+        // Insert the user
+        insert as system runAsUser;
+        
+        // Assign the permission sets, if any, to the user
+        assignPermSetsToUser(runAsUser,permissionSetNames);
+        
+        // Return the newly created user
+        return runAsUser;
+    }
+
+    /**
+     * @description Method to create a run as user with permission sets and field overrides
+     * @param       profileName        The (api) name of the Profile
+     * @param       permissionSetNames The (api) names of the Permission Sets
+     * @param       fieldOverrides     A map that contains custom field values for the user
+     * @return      A User record that can be used with the runAs() function
+     */
+    @TestVisible
+    private static User createRunAsUser(String profileName, String[] permissionSetNames, Map<SObjectField,Object> fieldOverrides){
+        // Create a new user
+        User runAsUser = createUserWithProfile(profileName);
+
+        // If there are any default field values that need to be overwritten do it here
+        populateSObjectValuesFromMapData(runAsUser,fieldOverrides);
+
+        // Insert the user
+        insert as system runAsUser;
+        
+        // Assign the permission sets, if any, to the user
+        assignPermSetsToUser(runAsUser,permissionSetNames);
+        
+        // Return the newly created user
+        return runAsUser;
+    }
+
+    /**
+     * @description Method to create a run as user with given Profile
+     * @param       profileName The (api) name of the Profile
+     * @return      A User record to be inserted
+     */
+    private static User createUserWithProfile(String profileName){
         // Create a new user
         User runAsUser = new User();
 
@@ -368,12 +415,17 @@ public with sharing class ApexUnitTestUtil {
         runAsUser.ProfileId         = profileId;
         runAsUser.IsActive          = true;
 
-        // If there are any default field values that need to be overwritten do it here
-        populateSObjectValuesFromMapData(runAsUser,fieldOverrides);
+        // Return the user to be created
+        return runAsUser;
+    }
 
-        // Insert the user
-        insert as system runAsUser;
-
+    /**
+     * @description Method to assign permission sets to the user
+     * @param       runAsUser         The User to assign the permission sets to
+     * @param       permissionSetNames The (api) names of the Permission Sets
+     * @return      A User record that can be used with the runAs() function
+     */
+    private static User assignPermSetsToUser(User runAsUser, String[] permissionSetNames){
         // If there are no permission sets simply return the user
         if(permissionSetNames == null || permissionSetNames.isEmpty()){
             return runAsUser;
@@ -489,7 +541,37 @@ public with sharing class ApexUnitTestUtil {
             }
 
             // Populate the field
-            sObj.put(fieldName,fieldNameFieldValueMap.get(fieldName));
+            try {
+                sObj.put(fieldName,fieldNameFieldValueMap.get(fieldName));
+            } catch (System.SObjectException e) {
+                throw new InvalidDataException(
+                    e.getMessage(),
+                    e
+                );
+            }
+        }
+    }
+
+
+    /**
+     * @description Method to populate data on an sObject from an Object Map
+     * @param sObj                     The sObject to populate with data
+     * @param fieldFieldValueMap The data to populate in the sObject
+     */
+    private static void populateSObjectValuesFromMapData(sObject sObj, Map<SObjectField,Object> fieldFieldValueMap){
+        // Null check, do nothing if any of the values equals null
+        if(sObj ==  null || fieldFieldValueMap == null){return;}
+        
+        // Populate the data from the data map
+        for(SObjectField field : fieldFieldValueMap.keySet()){
+            try {
+                sObj.put(field, fieldFieldValueMap.get(field));
+            } catch (System.SObjectException e) {
+                throw new InvalidDataException(
+                    e.getMessage(),
+                    e
+                );
+            }
         }
     }
 

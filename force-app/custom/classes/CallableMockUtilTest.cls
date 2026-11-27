@@ -36,8 +36,7 @@ private with sharing class CallableMockUtilTest {
             Callable callableObject = CallableMockUtil.getInstance();
 
             // Test the default action
-            Assert.areEqual(
-                true,
+            Assert.isTrue(
                 (Boolean) callableObject.call('testBoolean',null),
                 'Unexpected callable value'
             );

@@ -70,13 +70,13 @@ private with sharing class TstTest {
             Tst.addForcedCondition('APEX_UNIT_TEST');
 
             // Validate the condition exists and returns true
-            Assert.areEqual(true, Tst.forceCondition('APEX_UNIT_TEST'), 'Expected condition to be true');
+            Assert.isTrue(Tst.forceCondition('APEX_UNIT_TEST'), 'Expected condition to be true');
 
             // Remove the identifier
             Tst.removeForcedCondition('APEX_UNIT_TEST');
 
             // Validate the exception exists
-            Assert.areEqual(false, Tst.forceCondition('APEX_UNIT_TEST'), 'Expected condition to be false');
+            Assert.isFalse(Tst.forceCondition('APEX_UNIT_TEST'), 'Expected condition to be false');
         }
         Test.stopTest();
     }
@@ -131,7 +131,7 @@ private with sharing class TstTest {
      * @description Method to test the creation of a test user
      */
     @IsTest
-    static void testCreateUserWithDataOverrides(){
+    static void testCreateUserWithDataOverridesWithFieldsAsStrings(){
 
         Test.startTest();
         System.runAs(Tst.getRunningUser()){
@@ -149,7 +149,34 @@ private with sharing class TstTest {
             // Check that the custom values on the user record are updated correctly
             Assert.areEqual('Henk',     testUser.FirstName,         'Expected FirstName to be Henk');
             Assert.areEqual('de Vries', testUser.LastName,          'Expected last name to be de Vries');
-            Assert.areEqual(true,       testUser.ReceivesInfoEmails,'Expected ReceivesInfoEmails to be true');
+            Assert.isTrue(              testUser.ReceivesInfoEmails,'Expected ReceivesInfoEmails to be true');
+        }
+        Test.stopTest();
+    }
+
+    /**
+     * @description Method to test the creation of a test user
+     */
+    @IsTest
+    static void testCreateUserWithDataOverridesWithFieldsAsSObjectFields(){
+
+        Test.startTest();
+        System.runAs(Tst.getRunningUser()){
+            // Create a user with data overrides
+            User testUser = Tst.createRunAsUser(
+                Tst.MINIMUM_ACCESS_PROFILE,
+                new String[]{Tst.PERMISSION_SET_NAME},
+                new Map<SObjectField,Object>{
+                    User.FirstName          => 'Henk',
+                    User.LastName           => 'de Vries',
+                    User.ReceivesInfoEmails => true
+                }
+            );
+
+            // Check that the custom values on the user record are updated correctly
+            Assert.areEqual('Henk',     testUser.FirstName,         'Expected FirstName to be Henk');
+            Assert.areEqual('de Vries', testUser.LastName,          'Expected last name to be de Vries');
+            Assert.isTrue(              testUser.ReceivesInfoEmails,'Expected ReceivesInfoEmails to be true');
         }
         Test.stopTest();
     }
@@ -204,17 +231,17 @@ private with sharing class TstTest {
             }
 
 
-            // Invalid field in the data map
+            // Invalid field name in the data map
             try{
                 // Create a user with an invalid field
                 Tst.createRunAsUser(
                     Tst.MINIMUM_ACCESS_PROFILE,
                     new String[]{Tst.PERMISSION_SET_NAME},
-                     new Map<String,Object>{
-                    'FirstName'         => 'Henk',
-                    'LastName'          => 'de Vries',
-                    'InvalidField :-)'  => true
-                }
+                    new Map<String,Object>{
+                        'FirstName'         => 'Henk',
+                        'LastName'          => 'de Vries',
+                        'InvalidField :-)'  => true
+                    }
                 );
 
                 // This code should not be reached
@@ -227,6 +254,79 @@ private with sharing class TstTest {
                     Tst.INVALID_FIELD_VALUE_MAP_FIELD,
                     'InvalidField :-)',
                     'User',
+                    e
+                );
+            }
+
+            // Invalid field value type in the data map
+            try{
+                // Create a user with an invalid field
+                Tst.createRunAsUser(
+                    Tst.MINIMUM_ACCESS_PROFILE,
+                    new String[]{Tst.PERMISSION_SET_NAME},
+                    new Map<String,Object>{
+                        'FirstName' => 'Henk',
+                        'LastName'  => 12
+                    }
+                );
+
+                // This code should not be reached
+                Tst.assertExceptionHasBeenThrow();
+
+            }catch(Tst.InvalidDataException e){
+
+                // Assert a message with a detailed message inside
+                Tst.assertExceptionMessage(
+                    'Illegal assignment from Integer to String',
+                    e
+                );
+            }
+
+            // Invalid SObjectField in the data map
+            try{
+                // Create a user with an invalid field
+                Tst.createRunAsUser(
+                    Tst.MINIMUM_ACCESS_PROFILE,
+                    new String[]{Tst.PERMISSION_SET_NAME},
+                    new Map<SObjectField,Object>{
+                        User.FirstName => 'Henk',
+                        User.LastName  => 'de Vries',
+                        Account.Name   => 'Name'
+                    }
+                );
+
+                // This code should not be reached
+                Tst.assertExceptionHasBeenThrow();
+
+            }catch(Tst.InvalidDataException e){
+
+                // Assert a message with a detailed message inside
+                Tst.assertExceptionMessage(
+                    'Account.Name does not belong to SObject type User',
+                    e
+                );
+            }
+
+            // Invalid SObjectField value type in the data map
+            try{
+                // Create a user with an invalid field
+                Tst.createRunAsUser(
+                    Tst.MINIMUM_ACCESS_PROFILE,
+                    new String[]{Tst.PERMISSION_SET_NAME},
+                    new Map<SObjectField,Object>{
+                        User.FirstName => 'Henk',
+                        User.LastName  => 12
+                    }
+                );
+
+                // This code should not be reached
+                Tst.assertExceptionHasBeenThrow();
+
+            }catch(Tst.InvalidDataException e){
+
+                // Assert a message with a detailed message inside
+                Tst.assertExceptionMessage(
+                    'Illegal assignment from Integer to String',
                     e
                 );
             }
