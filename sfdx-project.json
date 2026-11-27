@@ -4,8 +4,8 @@
       "path": "force-app/package",
       "default": true,
       "package": "Lightweight - Apex Unit Test Util v2",
-      "versionName": "v68.0 - 2.8",
-      "versionNumber": "2.8.0.NEXT",
+      "versionName": "v68.0 - 2.9",
+      "versionNumber": "2.9.0.NEXT",
       "versionDescription": "A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking",
       "ancestorVersion": "HIGHEST"
     },
@@ -13,8 +13,8 @@
       "path": "force-app/package",
       "default": false,
       "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)",
-      "versionName": "v68.0 - 2.8",
-      "versionNumber": "2.8.0.NEXT",
+      "versionName": "v68.0 - 2.9",
+      "versionNumber": "2.9.0.NEXT",
       "versionDescription": "A lightweight Apex Unit Test Utility library for User creation, Exception Testing, HTTP Callout and Callable Mocking"
     }
   ],
@@ -32,6 +32,8 @@
     "Lightweight - Apex Unit Test Util v2@2.5.0-1": "04tP3000000rUmLIAU",
     "Lightweight - Apex Unit Test Util v2@2.6.0-1": "04tP3000001adofIAA",
     "Lightweight - Apex Unit Test Util v2@2.7.0-1": "04tP3000001adwjIAA",
+    "Lightweight - Apex Unit Test Util v2@2.8.0-1": "04tP3000002MBRtIAO",
+    "Lightweight - Apex Unit Test Util v2@2.9.0-1": "04tP3000002MBWjIAO",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)": "0Ho4K0000008OZISA2",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.0.0-2": "04t4K000002JvU8QAK",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.1.0-1": "04tP30000006pUUIAY",
@@ -40,7 +42,6 @@
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.4.0-1": "04tP3000000M6Q9IAK",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.5.0-1": "04tP3000000rUpZIAU",
     "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.6.0-1": "04tP3000001adrtIAA",
-    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.7.0-1": "04tP3000001adv7IAA",
-    "Lightweight - Apex Unit Test Util v2@2.8.0-1": "04tP3000002MBRtIAO"
+    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.7.0-1": "04tP3000001adv7IAA"
   }
 }

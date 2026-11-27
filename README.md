@@ -9,10 +9,10 @@ A lightweight Apex Unit Test Utility library for User creation, Exception Testin
 |   |   |   |   |
 |---|---|---|---|
 |Package Name|**[Lightweight - Apex Unit Test Util v2](https://github.com/jfwberg/lightweight-apex-unit-test-util-v2)**||
-|Package Version|2.7.0-1||
-|Last updated date|Nov 5, 2024||
-|Managed Package | <ul><li> `sf package install --wait 30 --security-type AllUsers --package 04tP3000002MBRtIAO`</li><li>`/packaging/installPackage.apexp?p0=04tP3000002MBRtIAO`</li></ul> | [Install in Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBRtIAO) | [Install in Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?mgd=true&p0=04tP3000002MBRtIAO)|
-|Unlocked Package| <ul><li> `sf package install --wait 30 --security-type AllUsers --package 04tP3000002MBQHIA4`</li><li>`/packaging/installPackage.apexp?p0=04tP3000002MBQHIA4`</li></ul> | [Install in Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBQHIA4) | [Install in Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBQHIA4)         |
+|Package Version|2.9.0-1||
+|Last updated date|Nov 27, 2026||
+|Managed Package | <ul><li> `sf package install --wait 30 --security-type AllUsers --package 04tP3000002MBWjIAO`</li><li>`/packaging/installPackage.apexp?p0=04tP3000002MBWjIAO`</li></ul> | [Install in Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBWjIAO) | [Install in Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?mgd=true&p0=04tP3000002MBWjIAO)|
+|Unlocked Package| <ul><li> `sf package install --wait 30 --security-type AllUsers --package 04tP3000002MBV7IAO`</li><li>`/packaging/installPackage.apexp?p0=04tP3000002MBV7IAO`</li></ul> | [Install in Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBV7IAO) | [Install in Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP3000002MBV7IAO)         |
 
 
 # Demo
