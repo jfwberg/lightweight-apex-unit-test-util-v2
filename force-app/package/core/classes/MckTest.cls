@@ -105,7 +105,7 @@ private with sharing class MckTest {
 
             }catch(Exception e){
                 // Assert the error message
-                Tst.assertExceptionMessage(Mck.MSG_NO_REPONSE_ID, e);
+                Tst.assertExceptionMessage(Mck.MSG_NO_RESPONSE_ID, e);
             }
 
 
@@ -119,7 +119,7 @@ private with sharing class MckTest {
 
             }catch(Exception e){
                 // Assert the error message
-                Tst.assertExceptionMessage(Mck.MSG_INVALID_REPONSE_ID, 'INVALID_IDENTIFIER', e);   
+                Tst.assertExceptionMessage(Mck.MSG_INVALID_RESPONSE_ID, 'INVALID_IDENTIFIER', e);   
             }    
         }
         Test.stopTest();
